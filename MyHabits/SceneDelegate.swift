@@ -18,12 +18,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
 
-        let viewController = ViewController()
-        let navigationController = UINavigationController(rootViewController: viewController)
+        let habitsVC = HabitsViewController()
+        let infoVC = InfoViewController()
 
-        window.rootViewController = navigationController
+        let habitsNC = UINavigationController(rootViewController: habitsVC)
+        habitsNC.tabBarItem.title = "Привычки"
+        habitsNC.tabBarItem.image = UIImage(systemName: "rectangle.grid.1x2.fill")
+
+        let infoNC = UINavigationController(rootViewController: infoVC)
+        infoNC.tabBarItem.title = "Информация"
+        infoNC.tabBarItem.image = UIImage(systemName: "info.circle.fill")
+
+        let tabBarVC = UITabBarController()
+        tabBarVC.viewControllers = [
+            habitsNC,
+            infoNC
+        ]
+        tabBarVC.tabBar.backgroundColor = .systemGray5
+        tabBarVC.tabBar.tintColor = UIColor(named: "CustomViolet")
+
+        window.rootViewController = tabBarVC
         window.makeKeyAndVisible()
-
         self.window = window
     }
 

@@ -14,6 +14,17 @@
 		FDA1EBD2288D57C5008DB36D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDA1EBD1288D57C5008DB36D /* Assets.xcassets */; };
 		FDA1EBD5288D57C5008DB36D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDA1EBD3288D57C5008DB36D /* LaunchScreen.storyboard */; };
 		FDA1EBDD288D5E4B008DB36D /* HabitsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA1EBDC288D5E4B008DB36D /* HabitsStore.swift */; };
+		FDA1EBE1288D655F008DB36D /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA1EBE0288D655F008DB36D /* InfoViewController.swift */; };
+		FDA1EBE3288D656D008DB36D /* HabitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA1EBE2288D656D008DB36D /* HabitsViewController.swift */; };
+		FDA1EBE7288D8201008DB36D /* UIView+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA1EBE6288D8201008DB36D /* UIView+Extention.swift */; };
+		FDA1EBE9288D929E008DB36D /* HabitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA1EBE8288D929E008DB36D /* HabitsView.swift */; };
+		FDA1EBFA2893070A008DB36D /* HabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA1EBF92893070A008DB36D /* HabitViewController.swift */; };
+		FDA1EBFC2893072D008DB36D /* HabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA1EBFB2893072D008DB36D /* HabitView.swift */; };
+		FDA1EBFE28930A73008DB36D /* CustomUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA1EBFD28930A73008DB36D /* CustomUITextField.swift */; };
+		FDA1EC00289408AB008DB36D /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA1EBFF289408AB008DB36D /* InfoView.swift */; };
+		FDA1EC0728944A5B008DB36D /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = FDA1EC0428944A5B008DB36D /* SF-Pro-Text-Regular.otf */; };
+		FDA1EC0828944A5B008DB36D /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FDA1EC0528944A5B008DB36D /* SF-Pro-Text-Semibold.otf */; };
+		FDA1EC0928944FA3008DB36D /* SF-Pro-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FDA1EC0328944A5B008DB36D /* SF-Pro-Display-Semibold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +37,17 @@
 		FDA1EBD4288D57C5008DB36D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FDA1EBD6288D57C5008DB36D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FDA1EBDC288D5E4B008DB36D /* HabitsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsStore.swift; sourceTree = "<group>"; };
+		FDA1EBE0288D655F008DB36D /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		FDA1EBE2288D656D008DB36D /* HabitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsViewController.swift; sourceTree = "<group>"; };
+		FDA1EBE6288D8201008DB36D /* UIView+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extention.swift"; sourceTree = "<group>"; };
+		FDA1EBE8288D929E008DB36D /* HabitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsView.swift; sourceTree = "<group>"; };
+		FDA1EBF92893070A008DB36D /* HabitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewController.swift; sourceTree = "<group>"; };
+		FDA1EBFB2893072D008DB36D /* HabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitView.swift; sourceTree = "<group>"; };
+		FDA1EBFD28930A73008DB36D /* CustomUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUITextField.swift; sourceTree = "<group>"; };
+		FDA1EBFF289408AB008DB36D /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		FDA1EC0328944A5B008DB36D /* SF-Pro-Display-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Semibold.otf"; sourceTree = "<group>"; };
+		FDA1EC0428944A5B008DB36D /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
+		FDA1EC0528944A5B008DB36D /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,13 +83,56 @@
 				FDA1EBC8288D57C4008DB36D /* AppDelegate.swift */,
 				FDA1EBCA288D57C4008DB36D /* SceneDelegate.swift */,
 				FDA1EBCC288D57C4008DB36D /* ViewController.swift */,
-				FDA1EBDC288D5E4B008DB36D /* HabitsStore.swift */,
+				FDA1EBDE288D6515008DB36D /* Habits */,
+				FDA1EBDF288D6524008DB36D /* Info */,
 				FDA1EBCE288D57C4008DB36D /* Main.storyboard */,
 				FDA1EBD1288D57C5008DB36D /* Assets.xcassets */,
 				FDA1EBD3288D57C5008DB36D /* LaunchScreen.storyboard */,
 				FDA1EBD6288D57C5008DB36D /* Info.plist */,
+				FDA1EBE6288D8201008DB36D /* UIView+Extention.swift */,
+				FDA1EBFD28930A73008DB36D /* CustomUITextField.swift */,
+				FDA1EC02289449A7008DB36D /* Fonts */,
 			);
 			path = MyHabits;
+			sourceTree = "<group>";
+		};
+		FDA1EBDE288D6515008DB36D /* Habits */ = {
+			isa = PBXGroup;
+			children = (
+				FDA1EBDC288D5E4B008DB36D /* HabitsStore.swift */,
+				FDA1EBE2288D656D008DB36D /* HabitsViewController.swift */,
+				FDA1EBE8288D929E008DB36D /* HabitsView.swift */,
+				FDA1EBF8289306E9008DB36D /* Habit */,
+			);
+			path = Habits;
+			sourceTree = "<group>";
+		};
+		FDA1EBDF288D6524008DB36D /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				FDA1EBE0288D655F008DB36D /* InfoViewController.swift */,
+				FDA1EBFF289408AB008DB36D /* InfoView.swift */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
+		FDA1EBF8289306E9008DB36D /* Habit */ = {
+			isa = PBXGroup;
+			children = (
+				FDA1EBF92893070A008DB36D /* HabitViewController.swift */,
+				FDA1EBFB2893072D008DB36D /* HabitView.swift */,
+			);
+			path = Habit;
+			sourceTree = "<group>";
+		};
+		FDA1EC02289449A7008DB36D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				FDA1EC0328944A5B008DB36D /* SF-Pro-Display-Semibold.otf */,
+				FDA1EC0428944A5B008DB36D /* SF-Pro-Text-Regular.otf */,
+				FDA1EC0528944A5B008DB36D /* SF-Pro-Text-Semibold.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,6 +193,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDA1EC0928944FA3008DB36D /* SF-Pro-Display-Semibold.otf in Resources */,
+				FDA1EC0828944A5B008DB36D /* SF-Pro-Text-Semibold.otf in Resources */,
+				FDA1EC0728944A5B008DB36D /* SF-Pro-Text-Regular.otf in Resources */,
 				FDA1EBD5288D57C5008DB36D /* LaunchScreen.storyboard in Resources */,
 				FDA1EBD2288D57C5008DB36D /* Assets.xcassets in Resources */,
 				FDA1EBD0288D57C4008DB36D /* Main.storyboard in Resources */,
@@ -142,9 +210,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDA1EBDD288D5E4B008DB36D /* HabitsStore.swift in Sources */,
+				FDA1EBE9288D929E008DB36D /* HabitsView.swift in Sources */,
+				FDA1EBE3288D656D008DB36D /* HabitsViewController.swift in Sources */,
 				FDA1EBCD288D57C4008DB36D /* ViewController.swift in Sources */,
+				FDA1EC00289408AB008DB36D /* InfoView.swift in Sources */,
+				FDA1EBE7288D8201008DB36D /* UIView+Extention.swift in Sources */,
 				FDA1EBC9288D57C4008DB36D /* AppDelegate.swift in Sources */,
 				FDA1EBCB288D57C4008DB36D /* SceneDelegate.swift in Sources */,
+				FDA1EBFA2893070A008DB36D /* HabitViewController.swift in Sources */,
+				FDA1EBFE28930A73008DB36D /* CustomUITextField.swift in Sources */,
+				FDA1EBE1288D655F008DB36D /* InfoViewController.swift in Sources */,
+				FDA1EBFC2893072D008DB36D /* HabitView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
