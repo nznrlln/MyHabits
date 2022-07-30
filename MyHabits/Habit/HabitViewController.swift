@@ -9,9 +9,15 @@ import UIKit
 
 class HabitViewController: UIViewController {
 
-    private let mainView: HabitView = {
+    private lazy var mainView: HabitView = {
         let view = HabitView()
         view.toAutoLayout()
+        view.delegate = self
+//        view.buttonTapAction = {
+//            let vc = UIColorPickerViewController()
+//            vc.delegate = self
+//            self.present(vc, animated: true)
+//        }
 
         return view
     }()
@@ -71,5 +77,32 @@ class HabitViewController: UIViewController {
 
     @objc private func saveButtonTap() {
         self.dismiss(animated: true)
+    }
+}
+
+
+// MARK: - HabitViewDelegate
+extension HabitViewController:HabitViewDelegate {
+    func colorPickerButtonTapAction() {
+        let vc = UIColorPickerViewController()
+        vc.delegate = self
+        self.present(vc, animated: true)
+    }
+
+    func timePickerButtonTapAction() {
+//        let vc = UIDatePicker()
+////        vc.delegate = self
+//        self.present(vc, animated: true)
+    }
+
+
+}
+
+// MARK: - UIColorPickerViewControllerDelegate
+
+extension HabitViewController: UIColorPickerViewControllerDelegate {
+
+    func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
+        mainView.updateColorPickerButton(viewController.selectedColor)
     }
 }

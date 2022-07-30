@@ -72,13 +72,13 @@ class InfoView: UIView {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
 
-            headerLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            headerLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            headerLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: InfoConstants.topInset),
+            headerLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: InfoConstants.leadingInset),
 
-            descriptionLabel.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 16),
-            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            descriptionLabel.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: InfoConstants.topInset),
+            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: InfoConstants.leadingInset),
+            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: InfoConstants.trailingInset),
+            descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: InfoConstants.bottomInset),
         ])
 
 

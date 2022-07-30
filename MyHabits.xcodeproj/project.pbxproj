@@ -25,6 +25,8 @@
 		FDA1EC0728944A5B008DB36D /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = FDA1EC0428944A5B008DB36D /* SF-Pro-Text-Regular.otf */; };
 		FDA1EC0828944A5B008DB36D /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FDA1EC0528944A5B008DB36D /* SF-Pro-Text-Semibold.otf */; };
 		FDA1EC0928944FA3008DB36D /* SF-Pro-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FDA1EC0328944A5B008DB36D /* SF-Pro-Display-Semibold.otf */; };
+		FDE56FF428945DD700429D82 /* InfoConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE56FF328945DD700429D82 /* InfoConstants.swift */; };
+		FDE56FF6289462FD00429D82 /* HabitConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE56FF5289462FD00429D82 /* HabitConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,8 @@
 		FDA1EC0328944A5B008DB36D /* SF-Pro-Display-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Semibold.otf"; sourceTree = "<group>"; };
 		FDA1EC0428944A5B008DB36D /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
 		FDA1EC0528944A5B008DB36D /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
+		FDE56FF328945DD700429D82 /* InfoConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoConstants.swift; sourceTree = "<group>"; };
+		FDE56FF5289462FD00429D82 /* HabitConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,7 @@
 				FDA1EBCA288D57C4008DB36D /* SceneDelegate.swift */,
 				FDA1EBCC288D57C4008DB36D /* ViewController.swift */,
 				FDA1EBDE288D6515008DB36D /* Habits */,
+				FDA1EBF8289306E9008DB36D /* Habit */,
 				FDA1EBDF288D6524008DB36D /* Info */,
 				FDA1EBCE288D57C4008DB36D /* Main.storyboard */,
 				FDA1EBD1288D57C5008DB36D /* Assets.xcassets */,
@@ -102,7 +107,6 @@
 				FDA1EBDC288D5E4B008DB36D /* HabitsStore.swift */,
 				FDA1EBE2288D656D008DB36D /* HabitsViewController.swift */,
 				FDA1EBE8288D929E008DB36D /* HabitsView.swift */,
-				FDA1EBF8289306E9008DB36D /* Habit */,
 			);
 			path = Habits;
 			sourceTree = "<group>";
@@ -112,6 +116,7 @@
 			children = (
 				FDA1EBE0288D655F008DB36D /* InfoViewController.swift */,
 				FDA1EBFF289408AB008DB36D /* InfoView.swift */,
+				FDE56FF328945DD700429D82 /* InfoConstants.swift */,
 			);
 			path = Info;
 			sourceTree = "<group>";
@@ -121,6 +126,7 @@
 			children = (
 				FDA1EBF92893070A008DB36D /* HabitViewController.swift */,
 				FDA1EBFB2893072D008DB36D /* HabitView.swift */,
+				FDE56FF5289462FD00429D82 /* HabitConstants.swift */,
 			);
 			path = Habit;
 			sourceTree = "<group>";
@@ -210,6 +216,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDA1EBDD288D5E4B008DB36D /* HabitsStore.swift in Sources */,
+				FDE56FF428945DD700429D82 /* InfoConstants.swift in Sources */,
+				FDE56FF6289462FD00429D82 /* HabitConstants.swift in Sources */,
 				FDA1EBE9288D929E008DB36D /* HabitsView.swift in Sources */,
 				FDA1EBE3288D656D008DB36D /* HabitsViewController.swift in Sources */,
 				FDA1EBCD288D57C4008DB36D /* ViewController.swift in Sources */,
