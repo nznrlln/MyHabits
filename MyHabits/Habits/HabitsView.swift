@@ -9,14 +9,18 @@ import UIKit
 
 class HabitsView: UIView {
 
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.toAutoLayout()
-        tableView.backgroundColor = UIColor(named: "CustomGray")
-        
-        return tableView
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.toAutoLayout()
+        collectionView.backgroundColor = UIColor(named: "CustomGray")
+        collectionView.register(ProgressCollectionViewCell.self, forCellWithReuseIdentifier: ProgressCollectionViewCell.identifier)
+        collectionView.register(HabitCollectionViewCell.self, forCellWithReuseIdentifier: HabitCollectionViewCell.identifier)
+
+        return collectionView
     }()
-    
+
     init() {
         super.init(frame: .zero)
         backgroundColor = .white
@@ -29,22 +33,26 @@ class HabitsView: UIView {
     }
 
     private func setupSubviews() {
-        // Чтобы large label не скролился - неообходимо, чтобы tableView была не первой в иерархии. Это также решает проблему неправильного отображения large label при использовании edgeInset у tableView (решается через sizeToFit() и DispatchQueue.main.async во viewWillAppear)
-        addSubviews(UIView(frame: .zero), tableView)
+        // Чтобы large label не скролился - неообходимо, чтобы collectionView была не первой в иерархии. Это также решает проблему неправильного отображения large label при использовании edgeInset у tableView (решается через sizeToFit() и DispatchQueue.main.async во viewWillAppear)
+        addSubviews(UIView(frame: .zero),collectionView)
     }
 
     private func setupSubviewsLayout() {
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: self.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            collectionView.topAnchor.constraint(equalTo: self.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
 
-    func setupTableView(dataSource: UITableViewDataSource, delegate: UITableViewDelegate) {
-        tableView.dataSource = dataSource
-        tableView.delegate = delegate
+    func setupCollectionView(dataSource: UICollectionViewDataSource, delegate: UICollectionViewDelegateFlowLayout) {
+        collectionView.dataSource = dataSource
+        collectionView.delegate = delegate
+    }
+
+    func updateHabitsList() {
+        collectionView.reloadData()
     }
 
 }

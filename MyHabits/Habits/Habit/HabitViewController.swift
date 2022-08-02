@@ -9,45 +9,74 @@ import UIKit
 
 class HabitViewController: UIViewController {
 
+    private var habit: Habit?
+
+    let store = HabitsStore.shared
+
+    var vcDone: (() -> Void)?
+
+    private var color: UIColor?
+
     private lazy var mainView: HabitView = {
         let view = HabitView()
         view.toAutoLayout()
         view.delegate = self
-//        view.buttonTapAction = {
-//            let vc = UIColorPickerViewController()
-//            vc.delegate = self
-//            self.present(vc, animated: true)
-//        }
 
         return view
     }()
 
     private lazy var cancelButton: UIBarButtonItem = {
         let button = UIBarButtonItem(title: "Отменить", style: .plain, target: self, action: #selector(cancelButtonTap))
-        button.tintColor = UIColor(named: "CustomViolet")
 
         return button
     }()
 
     private lazy var saveButton: UIBarButtonItem = {
         let button = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveButtonTap))
-        button.tintColor = UIColor(named: "CustomViolet")
 
         return button
     }()
 
+    init(habit: Habit?) {
+        self.habit = habit
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        viewInitialSettings()
+        if habit == nil {
+            viewInitialSettings()
+        } else {
+            editViewInitialSettings()
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        customizeNavigationBar()
     }
 
     private func viewInitialSettings() {
         view.backgroundColor = UIColor(named: "CustomGray")
+        self.title = "Создать"
+
         setupSubviews()
         setupSubviewsLayout()
-        customizeNavigationBar()
+    }
+
+    private func editViewInitialSettings() {
+        view.backgroundColor = UIColor(named: "CustomGray")
+        self.title = "Править"
+        color = habit?.color
+
+        setupSubviews()
+        setupSubviewsLayout()
+        mainView.showHabitData(habit: habit!)
     }
 
     private func setupSubviews() {
@@ -66,7 +95,7 @@ class HabitViewController: UIViewController {
     private func customizeNavigationBar() {
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.backgroundColor = UIColor(named: "CustomGray")
-        self.title = "Создать"
+        navigationController?.navigationBar.tintColor = UIColor(named: "CustomViolet")
         self.navigationItem.leftBarButtonItem = cancelButton
         self.navigationItem.rightBarButtonItem = saveButton
     }
@@ -76,25 +105,40 @@ class HabitViewController: UIViewController {
     }
 
     @objc private func saveButtonTap() {
+        mainView.saveHabit(color ?? .black)
         self.dismiss(animated: true)
+        self.vcDone?()
     }
 }
 
 
 // MARK: - HabitViewDelegate
 extension HabitViewController:HabitViewDelegate {
+
     func colorPickerButtonTapAction() {
         let vc = UIColorPickerViewController()
         vc.delegate = self
+        vc.selectedColor = color ?? .black
         self.present(vc, animated: true)
     }
+    
+    func deleteButtonTapAction() {
+        let alert = UIAlertController(title: "Удалить привычку", message: "Вы хотите удалить привычку *название выбранной привычки*?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { _ in
+            print("Отмена")
+        }
+        let closeAction = UIAlertAction(title: "Удалить", style: .destructive) { _ in
+            print("Удалить привычку")
+            self.store.habits.removeAll(where: { $0 == self.habit })
+            self.dismiss(animated: true, completion: nil)
+            self.vcDone?()
+        }
 
-    func timePickerButtonTapAction() {
-//        let vc = UIDatePicker()
-////        vc.delegate = self
-//        self.present(vc, animated: true)
+        alert.addAction(cancelAction)
+        alert.addAction(closeAction)
+
+        present(alert, animated: true, completion: nil)
     }
-
 
 }
 
@@ -104,5 +148,9 @@ extension HabitViewController: UIColorPickerViewControllerDelegate {
 
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
         mainView.updateColorPickerButton(viewController.selectedColor)
+    }
+
+    func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
+        self.color = viewController.selectedColor
     }
 }
