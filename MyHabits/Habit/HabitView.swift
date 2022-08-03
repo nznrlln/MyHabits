@@ -8,19 +8,15 @@
 import UIKit
 
 protocol HabitViewDelegate: AnyObject {
+
     func colorPickerButtonTapAction()
-    func deleteButtonTapAction()
+    func timePickerButtonTapAction()
 }
 
 class HabitView: UIView {
 
-    private var habit: Habit?
-
-    let store = HabitsStore.shared
-
+//    var buttonTapAction: (() -> Void)?
     var delegate: HabitViewDelegate?
-
-    let formatter = DateFormatter()
 
     private let habitNameLabel: UILabel = {
         let label = UILabel()
@@ -93,22 +89,13 @@ class HabitView: UIView {
         timePicker.preferredDatePickerStyle = .wheels
         timePicker.addTarget(self, action: #selector(updateTimePickerLabel), for: .valueChanged)
 
+        let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         timePicker.date = formatter.date(from: "23:00")!
 
         return timePicker
     }()
 
-    private lazy var deleteButton: UIButton = {
-        let button = UIButton()
-        button.toAutoLayout()
-        button.setTitle("Удалить привычку", for: .normal)
-        button.setTitleColor(.red, for: .normal)
-        button.addTarget(self, action: #selector(deleteButtonTap), for: .touchUpInside)
-        button.isHidden = true
-
-        return button
-    }()
 
     init() {
         super.init(frame: .zero)
@@ -122,17 +109,14 @@ class HabitView: UIView {
     }
 
     private func setupSubviews() {
-        self.addSubviews(
-            habitNameLabel,
-            habitDiscriptionField,
-            colorLabel,
-            colorPickerButton,
-            timeLabel,
-            timeTextLabel,
-            timePickerLabel,
-            timePicker,
-            deleteButton
-        )
+        self.addSubviews(habitNameLabel,
+                         habitDiscriptionField,
+                         colorLabel,
+                         colorPickerButton,
+                         timeLabel,
+                         timeTextLabel,
+                         timePickerLabel,
+                         timePicker)
     }
 
     private func setupSubviewsLayout() {
@@ -164,52 +148,27 @@ class HabitView: UIView {
 
             timePicker.topAnchor.constraint(equalTo: timeTextLabel.bottomAnchor, constant: HabitConstants.spacingInset),
             timePicker.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: HabitConstants.leadingInset),
-            timePicker.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-
-            deleteButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            deleteButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: HabitConstants.bottomInset)
+            timePicker.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
-    }
-
-    func showHabitData(habit: Habit) {
-        habitDiscriptionField.text = habit.name
-        colorPickerButton.backgroundColor = habit.color
-        timePicker.date = habit.date
-        updateTimePickerLabel()
-        deleteButton.isHidden = false
-        self.habit = habit
     }
 
     func updateColorPickerButton(_ color: UIColor) {
         colorPickerButton.backgroundColor = color
     }
 
-    func saveHabit(_ color: UIColor) {
-        if habit == nil{
-            let newHabit = Habit(name: habitDiscriptionField.text!, // передать из uitext field
-                                 date: timePicker.date, // передать из datepicker или через formatter из label
-                                 color: color) // передать из colorpicker
-            store.habits.append(newHabit)
-        } else {
-            let index = store.habits.firstIndex(of: habit!)
-            store.habits[index!].name = habitDiscriptionField.text!
-            store.habits[index!].date = timePicker.date
-            store.habits[index!].color = color
-        }
-
-    }
-
     @objc func updateTimePickerLabel() {
+        let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm a"
         timePickerLabel.text = formatter.string(from: self.timePicker.date)
     }
 
     @objc private func colorPickerButtonTap() {
+//        buttonTapAction?()
         delegate?.colorPickerButtonTapAction()
     }
 
-    @objc private func deleteButtonTap() {
-        delegate?.deleteButtonTapAction()
+    @objc private func timePickerButtonTap() {
+        delegate?.timePickerButtonTapAction()
+        print(#function)
     }
-
 }

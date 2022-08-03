@@ -9,12 +9,10 @@ import UIKit
 
 class HabitsViewController: UIViewController {
 
-    let store = HabitsStore.shared
-
     private lazy var mainView: HabitsView = {
         let view = HabitsView()
         view.toAutoLayout()
-        view.setupCollectionView(dataSource: self, delegate: self)
+        view.setupTableView(dataSource: self, delegate: self)
 
         return view
     }()
@@ -33,21 +31,15 @@ class HabitsViewController: UIViewController {
         viewInitialSettings()
     }
 
-    // вызываем тут иначе при возврате к корневой вью настройки сбиваются
-    override func viewWillAppear(_ animated: Bool) {
-        customizeNavigationBar()
-        mainView.updateHabitsList()
-    }
-
     private func viewInitialSettings() {
         view.backgroundColor = .white
-        self.title = "Сегодня"
-
         setupSubviews()
         setupSubviewsLayout()
+        customizeNavigationBar()
     }
 
     private func setupSubviews() {
+        mainView.setupTableView(dataSource: self, delegate: self)
         view.addSubview(mainView)
     }
 
@@ -64,93 +56,70 @@ class HabitsViewController: UIViewController {
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.backgroundColor = .white
         navigationController?.navigationBar.prefersLargeTitles = true
+        self.title = "Сегодня"
         self.navigationItem.rightBarButtonItem = addButton
     }
 
     @objc private func addButtonTap() {
-        let vc = HabitViewController(habit: nil)
-        vc.vcDone = { [weak self] in self?.mainView.updateHabitsList() }
+        let vc = HabitViewController()
         let nc = UINavigationController(rootViewController: vc)
         nc.modalPresentationStyle = .overFullScreen
         self.present(nc, animated: true)
     }
+
+    private let progressBar: UIProgressView = {
+        let progressBar = UIProgressView(progressViewStyle: .bar)
+        progressBar.toAutoLayout()
+
+        return progressBar
+    }()
    
 }
 
 
-// MARK: - UICollectionViewDataSource
+// MARK: - UITableViewDataSource
 
-extension HabitsViewController: UICollectionViewDataSource {
+extension HabitsViewController: UITableViewDataSource {
 
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        2
+    func numberOfSections(in tableView: UITableView) -> Int {
+        4
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        } else {
-            return store.habits.count
-        }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         if indexPath.section == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProgressCollectionViewCell.identifier, for: indexPath) as! ProgressCollectionViewCell
-            cell.setupCell(model: store)
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            var content: UIListContentConfiguration = cell.defaultContentConfiguration()
+            content.text = "Future progress bar"
+            cell.contentConfiguration = content
 
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HabitCollectionViewCell.identifier, for: indexPath) as! HabitCollectionViewCell
-            cell.setupCell(model: store.habits[indexPath.item])
-            cell.checkButtonTapAction = { [weak self] in
-                print("Toogle")
-                if !(self?.store.habits[indexPath.item].isAlreadyTakenToday)! {
-                    self?.store.track((self?.store.habits[indexPath.item])!)
-                }
-                collectionView.reloadData()
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            var content: UIListContentConfiguration = cell.defaultContentConfiguration()
+            content.text = "Секция: \(indexPath.section)"
+            content.secondaryText = "ячейка: \(indexPath.row)"
+            cell.contentConfiguration = content
 
-            }
             return cell
         }
+
     }
 
 
 }
 
-// MARK: - UICollectionViewFlowLayout
+// MARK: - UITableViewDataSource
 
-extension HabitsViewController: UICollectionViewDelegateFlowLayout {
+extension HabitsViewController: UITableViewDelegate {
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.section == 0 {
-            return CGSize(width: UIScreen.main.bounds.width - 40, height: 60)
-        } else {
-            return CGSize(width: UIScreen.main.bounds.width - 40, height: 120)
-        }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        if section == 0 {
-            return UIEdgeInsets(top: 20, left: 20, bottom: 10, right: 20)
-        } else {
-            return UIEdgeInsets(top: 10, left: 20, bottom: 20, right: 20)
-        }
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        10
-    }
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
-
-        if indexPath.section != 0 {
-            let controller = HabitDetailsViewController(habit: store.habits[indexPath.item])
-            self.navigationController?.pushViewController(controller, animated: true)
-        }
-    }
-
-    
 
 }
